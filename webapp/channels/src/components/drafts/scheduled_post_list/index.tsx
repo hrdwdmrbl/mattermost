@@ -9,22 +9,23 @@ import type {UserProfile, UserStatus} from '@mattermost/types/users';
 
 import {fetchMissingChannels} from 'mattermost-redux/actions/channels';
 
-import './style.scss';
 import EmptyScheduledPostList from './empty_scheduled_post_list';
 import ScheduledPostError from './scheduled_post_error';
-import ScheduledPosts from './scheduled_posts';
+import VirtualizedScheduledPostList from './virtualized_scheduled_post_list';
+
+import './style.scss';
 
 type Props = {
     scheduledPosts: ScheduledPost[];
     user: UserProfile;
-    displayName: string;
+    displayUsername: string;
     status: UserStatus['status'];
 };
 
 export default function ScheduledPostList({
     scheduledPosts,
     user,
-    displayName,
+    displayUsername,
     status,
 }: Props) {
     const dispatch = useDispatch();
@@ -37,10 +38,10 @@ export default function ScheduledPostList({
         <div className='ScheduledPostList'>
             <ScheduledPostError/>
             <EmptyScheduledPostList scheduledPostsCount={scheduledPosts.length}/>
-            <ScheduledPosts
+            <VirtualizedScheduledPostList
                 scheduledPosts={scheduledPosts}
                 user={user}
-                displayName={displayName}
+                displayUsername={displayUsername}
                 status={status}
             />
         </div>

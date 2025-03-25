@@ -59,6 +59,7 @@ type Props = {
     item: PostDraft | ScheduledPost;
     isRemote?: boolean;
     scrollIntoView?: boolean;
+    parentStyle?: React.CSSProperties;
 }
 
 const mockLastBlurAt = {current: 0};
@@ -70,6 +71,7 @@ function DraftRow({
     displayName,
     isRemote,
     scrollIntoView,
+    parentStyle,
 }: Props) {
     const [isEditing, setIsEditing] = useState(false);
 
@@ -366,6 +368,7 @@ function DraftRow({
             hasError={Boolean(postError)}
             innerRef={scrollIntoView ? alertRef : undefined}
             isHighlighted={scrollIntoView}
+            style={parentStyle}
         >
             {({hover}) => (
                 <>
